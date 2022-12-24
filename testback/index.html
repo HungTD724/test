@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ngược tròn 1 năm</title>
+    <link rel="stylesheet" href="/testback/main.css">
+</head>
+<body>
+    <div class="container">
+        <h2
+            style="color: #f7b1d1;
+            text-shadow: 0 0 10px #fe5ca5, 0 0 20px #fe5ca5, 0 0 40px #fe5ca5,
+                0 0 80px #fe5ca5, 0 0 120px #fe5ca5;"
+        >1 năm</h2>
+        <div class="countdown">
+            <div id="day">NA</div>
+            <div id="hour">NA</div>
+            <div id="minute">NA</div>
+            <div id="second">NA</div>
+        </div>
+        <button type="button" onclick="location.href='../XS/index.html'" style="margin-top: 100px;"><span>Tiếp tục</span></button>
+    </div>
+
+    <script>
+        var countDate = new Date('Feb 8, 2023  00:00:00').getTime();
+
+        function newYear(){
+            var now = new Date().getTime();
+                gap = countDate - now;
+
+            var second = 1000;
+            var minute = second * 60;
+            var hour = minute * 60;
+            var day = hour * 24;
+
+            var d = Math.floor(gap / (day));
+            var h = Math.floor((gap % (day)) / (hour));
+            var m = Math.floor((gap % (hour)) / (minute));
+            var s = Math.floor((gap % (minute)) / second);
+
+            document.getElementById('day').innerHTML = d;
+            document.getElementById('hour').innerHTML = h;
+            document.getElementById('minute').innerHTML = m;
+            document.getElementById('second').innerHTML = s;
+        }
+
+        setInterval(function(){
+            newYear();
+        }, 1000);
+
+    </script>
+</body>
+</html>

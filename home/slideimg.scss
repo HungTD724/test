@@ -1,0 +1,77 @@
+body {
+  display: grid;
+  place-content: center;
+}
+
+$n: 5; /* number of images*/
+
+.home-page .gallery {
+  --d: 10s; /* duration */
+
+  display: grid;
+  width: 220px;
+}
+.home-page .gallery > img {
+  grid-area: 1/1;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 10px solid #f2f2f2;
+  box-shadow: 0 0 4px #0007;
+  animation: slide var(--d) infinite;
+  border-radius: 15px;
+}
+.home-page .gallery img:last-child {
+  animation-name: slide-last;
+}
+
+@for $i from 1 to ($n + 1) {
+  .home-page .gallery > img:nth-child(#{$i}) {
+    animation-delay: calc(#{(1 - $i) / $n}* var(--d));
+    --r: #{(-20 + random(40)) * 1deg};
+  }
+}
+@keyframes slide {
+  0%,
+  100%,
+  #{100.01 - 100/$n}% {
+    transform: translateX(0%) rotate(var(--r));
+    z-index: 3;
+  }
+  #{50/$n}% {
+    transform: translateX(-120%) rotate(var(--r));
+    z-index: 3;
+  }
+  #{50/$n + .01}% {
+    transform: translateX(-120%) rotate(var(--r));
+    z-index: -3;
+  }
+  #{100/$n}%,
+  #{100 - 100/$n}% {
+    transform: translateX(0%) rotate(var(--r));
+    z-index: -3;
+  }
+}
+
+@keyframes slide-last 
+{
+  0%,
+  100%,
+  #{100.01 - 50/$n}% {
+    transform: translateX(0%) rotate(var(--r));
+    z-index: 3;
+  }
+  #{50/$n}% {
+    transform: translateX(120%) rotate(var(--r));
+    z-index: 3;
+  }
+  #{50/$n + .01}% {
+    transform: translateX(120%) rotate(var(--r));
+    z-index: -3;
+  }
+  #{100/$n}%,
+  #{100 - 50/$n}% {
+    transform: translateX(0%) rotate(var(--r));
+    z-index: -3;
+  }
+}
